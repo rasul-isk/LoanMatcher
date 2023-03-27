@@ -14,3 +14,6 @@ Maximum input and output sum can be 10000 € <br>
 Minimum loan period can be 12 months <br>
 Maximum loan period can be 60 months <br>
 
+# Notes to developers
+Client folder is frontend folder which contains React project. `npm install` has to executed. Then, you can run app by `npm start`.<br> 
+Server is an IntelliJ IDEA project which contains Spring Boot application. Nothing to install, just run backend before running frontend :)
