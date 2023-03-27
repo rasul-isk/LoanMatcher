@@ -1,13 +1,13 @@
 import { Box, Slider } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import React from 'react'
-import { styleOfSlider } from '../data/sliderInfo';
+import React from 'react';
+import { styleOfSlider } from '../data/sliderData';
 
 const PrettoSlider = styled(Slider)(styleOfSlider);
 
 const MainSlider = ({ marks, dispatch, step, action, value }) => {
   return (
-    <Box sx={{ m: '40px 0' }}>
+    <Box sx={{ mt: '40px' }}>
       <PrettoSlider
         aria-label="Small steps"
         value={value}

@@ -2,8 +2,7 @@ html,
 body,
 #root,
 .app {
-  /* background: rgb(2,0,36); */
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 25%, rgba(0,212,255,1) 100%);
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 25%, rgba(0, 212, 255, 1) 100%);
   display: grid;
   justify-items: center;
   align-content: center;
@@ -13,18 +12,7 @@ body,
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-/* .header {
-  border-radius: 35% !important;
-  padding: 60px !important;
-  display: flex !important;
-} 
- .container-item {
+.container {
   align-items: center;
-  display: block;
-  padding: 50px;
-  width: 40%;
-  height: fit-content;
-  margin: 10px;
-  border-radius: 25%;
+  display: flex;
 }
-*/

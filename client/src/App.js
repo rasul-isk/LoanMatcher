@@ -18,19 +18,22 @@ const formReducer = (prev, cur) => {
   }[cur.action];
 };
 
+//TODO 
+//Loan Application text & Decision text font?
+//edit animations ease in, ease out
+//hover on buttons 
+//other cool styles from internet
 function App() {
   const [form, dispatchForm] = useReducer(formReducer, formDefaultValues);
   const [decision, setDecision] = useState({});
 
-  // Textfields with common css
-  //Clear button
-  // display flex Loan and app component from left to right
-
   return (
     <div className="App">
       <CssBaseline />
-      <LoanForm form={form} dispatchForm={dispatchForm} decision={decision} setDecision={setDecision} />
-      {decision.info && <Decision decision={decision} />}
+      <div className="container">
+        <LoanForm form={form} dispatchForm={dispatchForm} decision={decision} setDecision={setDecision} />
+        {decision.info && <Decision decision={decision} setDecision={setDecision} dispatchForm={dispatchForm} />}
+      </div>
     </div>
   );
 }

@@ -23,15 +23,18 @@ public class LoanService {
             if (loan.getLoanAmount() < maxAmount) {
                 decision.add("You can get more than requested.");
             }
-            if (maxAmount > 10000) { //cs > 1 and max amount more than 10K$
-                decision.add("Maximum available loan amount is 10K$.");
+            if (maxAmount > 10000) { //cs > 1 and max amount more than 10K€
+                decision.add("Maximum available loan amount is €10,000.");
                 maxAmount = 10000;
             }
         } else {
             decision.add("Negative response: you have low credit score."); //cs < 1
-            if (maxAmount < 2000) { //cs < 1 and max amount to give for specified period < 2000$
+            if (maxAmount < 2000) { //cs < 1 and max amount to give for specified period < 2000€
                 decision.add("Following option(s) modified: loan period, maximum loan amount");
-                loanPeriod = (int) Math.ceil(2000.0 / creditModifier); //get min period for min amount (2000$)
+                loanPeriod = (int) Math.ceil(2000.0 / creditModifier); //get min period for min amount (2000€)
+                if(loanPeriod > 60) {
+                    return new Decision("Minimum loan can't be given even for 60 months.", 0, 0);
+                }
                 maxAmount = (int) Math.floor(creditModifier * loanPeriod / 100.0) * 100; //get max amount for modified period
             } else {
                 decision.add("Following option(s) modified: maximum loan amount");

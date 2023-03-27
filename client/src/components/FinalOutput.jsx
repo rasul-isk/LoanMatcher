@@ -1,31 +1,24 @@
 import { Box, FormControl, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
 import React from 'react';
 
-const FinalOutput = ({ form, dispatchForm }) => {
+const FinalOutput = ({ amount, period }) => {
   return (
-    <Box>
-      <FormControl fullWidth={false} sx={{ m: 1 }}>
+    <Box display="inline-flex" mt="10px">
+      <FormControl fullWidth={false} sx={{ m: 1, fill: 0.5 }}>
         <InputLabel htmlFor="outlined-adornment-amount">Loan Amount</InputLabel>
         <OutlinedInput
           startAdornment={
-            <InputAdornment position="start" sx={{ mt: '3px' }}>
-              €
+            <InputAdornment position="start" sx={{ mt: '2px' }}>
+              <strong>€</strong>
             </InputAdornment>
           }
           inputProps={{ readOnly: true }}
           label="Loan Amount"
-          value={form.loanAmount.toLocaleString('en-UK')}
-          onChange={(event) => dispatchForm({ action: 'loanAmount', value: event.target.value })}
+          value={amount.toLocaleString('en-UK')}
         />
       </FormControl>
-      <TextField
-        inputProps={{ readOnly: true }}
-        sx={{ m: 1 }}
-        label="Period (monthes)"
-        variant="outlined"
-        value={form.loanPeriod}
-        onChange={(event) => dispatchForm({ action: 'loanPeriod', value: event.target.value })}
-      />
+
+      <TextField inputProps={{ readOnly: true }} sx={{ m: 1, fill: 0.5 }} label="Period (monthes)" variant="outlined" value={period} />
     </Box>
   );
 };
