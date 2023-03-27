@@ -1,26 +1,14 @@
 package com.loanmatcher.loan;
 
 public class Loan {
-    final private String personalCode;
-    private int loanAmount;
-    private int loanPeriod;
-    private int creditModifier;
-    private double creditScore;
-    private String decision;
-    private double maxLoanAmount;
+    private final String personalCode;
+    private final int loanAmount;
+    private final int loanPeriod;
 
-    public Loan(String personalCode, int loanAmount, int loanPeriod, int creditModifier, double creditScore, String decision, double maxLoanAmount) {
+    public Loan(String personalCode, int loanAmount, int loanPeriod) {
         this.personalCode = personalCode;
         this.loanAmount = loanAmount;
         this.loanPeriod = loanPeriod;
-        this.creditModifier = creditModifier;
-        this.creditScore = creditScore;
-        this.decision = decision;
-        this.maxLoanAmount = maxLoanAmount;
-    }
-
-    public String getPersonalCode() {
-        return personalCode;
     }
 
     public int getLoanAmount() {
@@ -31,47 +19,21 @@ public class Loan {
         return loanPeriod;
     }
 
-    public void setLoanPeriod(int loanPeriod) {
-        this.loanPeriod = loanPeriod;
-    }
-
-    public int getCreditModifier() {
-        return creditModifier;
-    }
-
-    public void setCreditModifier(int creditModifier) {
-        this.creditModifier = creditModifier;
-    }
-
-    public double getCreditScore() {
-        return creditScore;
-    }
-
-    public void setCreditScore(double creditScore) {
-        this.creditScore = creditScore;
-    }
-
-    public String getDecision() {
-        return decision;
-    }
-
-    public void setDecision(String decision) {
-        this.decision = decision;
-    }
-
-    public double getMaxLoanAmount() {
-        return maxLoanAmount;
-    }
-
-    public void setMaxLoanAmount(double maxLoanAmount) {
-        this.maxLoanAmount = maxLoanAmount;
-    }
-
     public boolean isRequestValid() {
-        boolean correctModifier = this.creditModifier != -1;
+        boolean correctModifier = this.getCreditModifier() != -1;
         boolean correctAmount = this.loanAmount <= 10000 && this.loanAmount >= 2000;
         boolean correctPeriod = this.loanPeriod >= 12 && this.loanPeriod <= 60;
 
         return correctModifier && correctAmount && correctPeriod;
+    }
+
+    public int getCreditModifier() {
+        return switch (this.personalCode) {
+            case "49002010965" -> 0; // person has debt
+            case "49002010976" -> 100; // segment 1
+            case "49002010987" -> 300; // segment 2
+            case "49002010998" -> 1000; // segment 3
+            default -> -1; // invalid personal code
+        };
     }
 }

@@ -2,46 +2,42 @@ package com.loanmatcher.loan;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class LoanService {
-    public void calculateLoanDecision(Loan loan) {
-        double creditScore = (double) (loan.getCreditModifier() / loan.getLoanAmount()) * loan.getLoanPeriod();
-        double maxAmount = loan.getCreditModifier() * loan.getLoanPeriod();
+    public Decision calculateLoanDecision(Loan loan) {
+        int creditModifier = loan.getCreditModifier();
+        int loanPeriod = loan.getLoanPeriod();
+        int maxAmount = creditModifier * loanPeriod;
+        double creditScore = (double) creditModifier / loan.getLoanAmount() * loanPeriod;
+        List<String> decision = new ArrayList<>();
 
         if (creditScore >= 1) {
-            loan.setDecision("positive"); //cs > 1
-
+            decision.add("Positive response."); //cs > 1
+            if (loan.getLoanAmount() < maxAmount) {
+                decision.add("You can get more than requested.");
+            }
             if (maxAmount > 10000) { //cs > 1 and max amount more than 10K$
-                loan.setMaxLoanAmount(10000);
+                decision.add("Maximum available loan amount is 10K$.");
+                maxAmount = 10000;
             }
-            else {
-                loan.setMaxLoanAmount(maxAmount); //cs > 1 and max amount <= 10K$
-            }
-        }
-        else {
-            loan.setDecision("negative"); //cs < 1
+        } else {
+            decision.add("Negative response: you have low credit score."); //cs < 1
             if (maxAmount < 2000) { //cs < 1 and max amount to give for specified period < 2000$
-                loan.setLoanPeriod((int) Math.ceil(2000.0 / loan.getCreditModifier())); //get min period for min amount (2000$)
-                loan.setMaxLoanAmount(loan.getCreditModifier() * loan.getLoanPeriod()); //show max amount for modified period
+                decision.add("Following option(s) modified: loan period, maximum loan amount");
+                loanPeriod = (int) Math.ceil(2000.0 / creditModifier); //get min period for min amount (2000$)
+                maxAmount = (int) Math.floor(creditModifier * loanPeriod / 100.0) * 100; //get max amount for modified period
             } else {
-                loan.setMaxLoanAmount(maxAmount);
+                decision.add("Following option(s) modified: maximum loan amount");
             }
         }
-        loan.setCreditScore(creditScore);
+        return new Decision(listToString(decision), loan.getLoanPeriod(), maxAmount);
     }
 
-    public int getCreditModifier(String personalCode) {
-        switch (personalCode) {
-            case "49002010965":
-                return 0; // person has debt
-            case "49002010976":
-                return 100; // segment 1
-            case "49002010987":
-                return 300; // segment 2
-            case "49002010998":
-                return 1000; // segment 3
-            default:
-                return -1; // invalid personal code
-        }
+    private String listToString(List<String> decision) {
+        return decision.stream().reduce((a, b) -> a + " " + b).orElse("");
     }
+
 }
