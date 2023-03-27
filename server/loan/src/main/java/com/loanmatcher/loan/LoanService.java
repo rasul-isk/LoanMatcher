@@ -14,6 +14,10 @@ public class LoanService {
         double creditScore = (double) creditModifier / loan.getLoanAmount() * loanPeriod;
         List<String> decision = new ArrayList<>();
 
+        if(creditModifier == 0) {
+            return new Decision("Loan is declined. You already have a debt.", 0, 0);
+        }
+
         if (creditScore >= 1) {
             decision.add("Positive response."); //cs > 1
             if (loan.getLoanAmount() < maxAmount) {
