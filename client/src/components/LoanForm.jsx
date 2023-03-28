@@ -1,3 +1,4 @@
+import { makeStyles } from '@material-ui/core/styles';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Button, IconButton, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
@@ -6,8 +7,33 @@ import { marksAmount, marksPeriod } from '../data/sliderData';
 import { colors } from '../theme';
 import FinalOutput from './FinalOutput';
 import MainSlider from './MainSlider';
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     "& .MuiFilledInput-root": {
+//       background: "rgb(232, 241, 250)"
+//     }
+//   }
+// }));
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiFilledInput-root': {
+      backgroundColor: 'rgb(232, 241, 250)',
+    },
+    '& .MuiFilledInput-root:hover': {
+      backgroundColor: 'rgb(250, 232, 241)',
+      // Reset on touch devices, it doesn't add specificity
+      '@media (hover: none)': {
+        backgroundColor: 'rgb(232, 241, 250)',
+      },
+    },
+    '& .MuiFilledInput-root.Mui-focused': {
+      backgroundColor: 'rgb(250, 241, 232)',
+    },
+  },
+}));
 function LoanForm({ form, dispatchForm, setDecision }) {
+  const classes = useStyles();
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
