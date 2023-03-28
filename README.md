@@ -3,18 +3,18 @@
 LoanMatcher is a web application designed to help users find suitable loans based on their personal code, loan amount, and loan period. The application features a decision engine that determines the maximum loan amount that can be approved, based on a primitive scoring algorithm. <br>
 <br>
 
-# Technologies
+### Features
+
+With LoanMatcher, users can input their personal code, loan amount, and loan period, and the decision engine will provide a positive or negative decision, as well as the maximum loan amount that can be approved. The decision engine will also attempt to find a new suitable period if a suitable loan amount is not found within the selected period.
+<br>
+
+### Used Technologies
 
 Spring Boot as the backend framework <br>
 React as the frontend framework <br>
 <br>
 
-## Features
-
-With LoanMatcher, users can input their personal code, loan amount, and loan period, and the decision engine will provide a positive or negative decision, as well as the maximum loan amount that can be approved. The decision engine will also attempt to find a new suitable period if a suitable loan amount is not found within the selected period.
-<br>
-
-# Personal Code examples
+## Personal Code examples
 
 Following personal codes are given to demonstrate possible cases within the app: <br>
 49002010965 - debt<br>
@@ -33,5 +33,5 @@ Maximum loan period can be 60 months <br>
 
 # Notes to developers
 
-**Client** folder is frontend folder which contains React project. `npm install` has to executed. Then, you can run app by `npm start`.<br>
-_Server_ folder has **loan** folder which contains Spring Boot application. Nothing to install, just run backend before running frontend🙂
+**_Client_** folder is frontend folder which contains React project. `npm install` has to executed. Then, you can run app by `npm start`.<br>
+_Server_ folder has **_loan_** folder which contains Spring Boot application. Nothing to install, just run backend before running frontend🙂
