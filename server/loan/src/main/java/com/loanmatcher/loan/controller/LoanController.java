@@ -1,5 +1,8 @@
-package com.loanmatcher.loan;
+package com.loanmatcher.loan.controller;
 
+import com.loanmatcher.loan.service.LoanService;
+import com.loanmatcher.loan.model.Decision;
+import com.loanmatcher.loan.model.Loan;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +19,12 @@ public class LoanController {
     }
 
     @PostMapping("/loan")
-    public ResponseEntity<Decision> calculateLoan(@RequestBody Loan loan) {
-        if (loan.isRequestValid()) {
+    public ResponseEntity<Decision> handleLoanRequest(@RequestBody Loan loan) {
+        if (loan.isRequestValid()) { //if request is valid, calculate loan and return given Decision
             Decision decision = loanService.calculateLoanDecision(loan);
             return ResponseEntity.ok(decision);
         } else {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().build(); //return bad error with code of 400
         }
     }
 }
