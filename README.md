@@ -29,5 +29,5 @@ Maximum loan period can be 60 months <br>
 
 # Notes to developers
 
-**_Client_** folder is frontend folder which contains React project. `npm install` has to be executed. Then, you can run app by `npm start`.<br>
-_Server_ folder has **_loan_** folder which contains Spring Boot application. Nothing to install, just run backend before running frontend🙂
+_Server_ folder has **_loan_** folder which contains Spring Boot application. You can right click on **_loan_** folder and open it through your IDE. Nothing to install, just run it before running frontend🙂<br>
+**_Client_** folder is frontend folder which contains React project. You can open this folder straight in your IDE. `npm install` has to be executed. Then, you can run app by `npm start`.<br>

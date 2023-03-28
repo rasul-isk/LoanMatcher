@@ -18,11 +18,6 @@ const formReducer = (prev, cur) => {
   }[cur.action];
 };
 
-//TODO 
-//Loan Application text & Decision text font?
-//edit animations ease in, ease out
-//hover on buttons 
-//other cool styles from internet
 function App() {
   const [form, dispatchForm] = useReducer(formReducer, formDefaultValues);
   const [decision, setDecision] = useState({});
